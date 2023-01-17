@@ -11,4 +11,15 @@ const login = async (credentials) => {
     return await response.json();
 };
 
-export {login};
+const register = async (credentials) => {
+    const response = await fetch(`${api_url}/auth/signup`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(credentials),
+    });
+    return await response.json();
+};
+
+export {login, register};

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Card,
   CardHeader,
@@ -9,16 +9,23 @@ import {
   Checkbox,
   Button,
 } from "@material-tailwind/react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { login } from "../services/auth";
 import { BiLoaderAlt } from "react-icons/bi";
+import { setItem } from "../services/localStorage";
 
 const Signin = () => {
+  // Get user signed up data
+  const location = useLocation();
+  const data = location.state?.data;
+
   const [isLoading, setIsLoading] = useState(false);
   const [form, setForm] = useState({
     fullname: "",
     password: "",
   });
+
+  const [error, setError] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -26,36 +33,52 @@ const Signin = () => {
       ...form,
       [name]: value,
     };
-    setForm(formData);
+    setForm(data ? data : formData);
   };
 
   const handleSubmit = async () => {
-    console.log(form);
     setIsLoading(true);
     const response = await login({
       username: form.fullname,
       password: form.password,
     });
     if (response?.error) {
-      console.log(response?.error);
+      setError(response?.error);
       return setIsLoading(false);
     }
     const token = response?.accessToken;
-    console.log(token);
+    setItem({
+      token: token,
+    });
+    setError("");
+    setForm({
+      fullname: "",
+      password: "",
+    });
     setIsLoading(false);
   };
+
+  useEffect(() => {
+    if (data) setForm(data);
+  }, []);
   return (
     <div className="relative flex h-[100vh] items-center justify-center bg-[url('https://res.cloudinary.com/dumxkdcvd/image/upload/v1673853648/itachi_f14qwf.gif')] bg-cover bg-center bg-no-repeat">
       <div className="absolute h-full w-full bg-black bg-opacity-60" />
       <Card className="w-96">
         <CardHeader
           variant="gradient"
-          color="blue"
+          color={error ? "red" : data ? "green" : "blue"}
           className="mb-4 grid h-28 place-items-center"
         >
-          <Typography variant="h3" color="white">
-            Sign In
-          </Typography>
+          {data ? (
+            <Typography variant="h5" color="white">
+              Account created successfully !
+            </Typography>
+          ) : (
+            <Typography variant={error ? "h5" : "h3"} color="white">
+              {error ? error : "Sign In"}
+            </Typography>
+          )}
         </CardHeader>
         <CardBody className="flex flex-col gap-4">
           <Input
