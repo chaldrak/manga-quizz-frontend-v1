@@ -1,15 +1,14 @@
 import React from "react";
 import useAuth from "../hooks/useAuth";
-import { removeItem } from "../services/localStorage";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useState, useEffect } from "react";
 import {
   Navbar,
   MobileNav,
   Typography,
-  Button,
   IconButton,
 } from "@material-tailwind/react";
+import UserIcon from "./UserIcon";
 
 const menu = [
   {
@@ -31,13 +30,8 @@ const menu = [
 ];
 
 const GlobalNav = () => {
-  const navigate = useNavigate();
-  const { auth, setAuth } = useAuth();
-  const logout = () => {
-    removeItem();
-    navigate("/signin");
-    setAuth({});
-  };
+  const { auth } = useAuth();
+
   const [openNav, setOpenNav] = useState(false);
 
   useEffect(() => {
@@ -52,7 +46,7 @@ const GlobalNav = () => {
       {menu.map((item, index) => (
         <Typography
           as="li"
-          variant="medium"
+          variant="h6"
           color="blue-gray"
           className="p-1 font-bold hover:text-yellow-900"
           key={index}
@@ -81,13 +75,7 @@ const GlobalNav = () => {
             </NavLink>
           </Typography>
           <div className="hidden lg:block">{navList}</div>
-          <Button
-            variant="gradient"
-            size="sm"
-            className="hidden lg:inline-block"
-          >
-            <span>Buy Now</span>
-          </Button>
+          <UserIcon placement="bottom-end" variant="desktop" />
           <IconButton
             variant="text"
             className="ml-auto h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
@@ -128,9 +116,7 @@ const GlobalNav = () => {
         </div>
         <MobileNav open={openNav}>
           {navList}
-          <Button variant="gradient" size="sm" fullWidth className="mb-2">
-            <span>Buy Now</span>
-          </Button>
+          <UserIcon placement="top-start" variant="mobile" />
         </MobileNav>
       </Navbar>
     );
