@@ -9,15 +9,21 @@ import {
   Checkbox,
   Button,
 } from "@material-tailwind/react";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { login } from "../services/auth";
 import { BiLoaderAlt } from "react-icons/bi";
 import { setItem } from "../services/localStorage";
+import useAuth from "../hooks/useAuth";
 
 const Signin = () => {
+  const { auth, setAuth } = useAuth();
+  const navigate = useNavigate();
   // Get user signed up data
   const location = useLocation();
   const data = location.state?.data;
+
+  // Get the previous location
+  const from = location.state?.from?.pathname;
 
   const [isLoading, setIsLoading] = useState(false);
   const [form, setForm] = useState({
@@ -50,16 +56,21 @@ const Signin = () => {
     setItem({
       token: token,
     });
+    setAuth({ token });
     setError("");
     setForm({
       fullname: "",
       password: "",
     });
     setIsLoading(false);
+    navigate(from ? from : "/", {
+      replace: true,
+    });
   };
 
   useEffect(() => {
     if (data) setForm(data);
+    if (auth?.token) navigate("/", { replace: true });
   }, []);
   return (
     <div className="relative flex h-[100vh] items-center justify-center bg-[url('https://res.cloudinary.com/dumxkdcvd/image/upload/v1673853648/itachi_f14qwf.gif')] bg-cover bg-center bg-no-repeat">

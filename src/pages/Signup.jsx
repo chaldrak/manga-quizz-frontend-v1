@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Card,
   CardHeader,
@@ -12,8 +12,11 @@ import {
 import { NavLink, useNavigate } from "react-router-dom";
 import { BiLoaderAlt } from "react-icons/bi";
 import { register } from "../services/auth";
+import useAuth from "../hooks/useAuth";
 
 const Signup = () => {
+  const { auth } = useAuth();
+
   const [form, setForm] = useState({
     fullname: "",
     password: "",
@@ -55,6 +58,9 @@ const Signup = () => {
     const data = { fullname: form.fullname, password: form.password };
     navigate("/signin", { replace: true, state: { data: data } });
   };
+  useEffect(() => {
+    if (auth?.token) navigate("/", { replace: true });
+  }, []);
   return (
     <div className="relative flex h-[100vh] items-center justify-center bg-[url('https://res.cloudinary.com/dumxkdcvd/image/upload/v1673853648/itachi_f14qwf.gif')] bg-cover bg-center bg-no-repeat">
       <div className="absolute h-full w-full bg-black bg-opacity-60" />
