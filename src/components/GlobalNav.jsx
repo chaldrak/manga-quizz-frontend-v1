@@ -12,20 +12,16 @@ import UserIcon from "./UserIcon";
 
 const menu = [
   {
-    name: "Pages",
-    path: "/pages",
+    name: "Dashboard",
+    path: "/dashboard",
   },
-  {
-    name: "Account",
-    path: "/account",
-  },
+  // {
+  //   name: "Leaderboard",
+  //   path: "/dashboard/leaders",
+  // },
   {
     name: "FAQ",
     path: "/faq",
-  },
-  {
-    name: "Leaderboard",
-    path: "/leaderboard",
   },
 ];
 
@@ -60,7 +56,7 @@ const GlobalNav = () => {
   );
   if (auth?.token)
     return (
-      <Navbar className="max-w-screen-7xl mx-auto w-full rounded-none py-2 px-4 lg:px-8">
+      <Navbar className="max-w-screen-7xl relative z-40 mx-auto w-full rounded-none py-2 px-4 lg:px-8">
         <div className="container mx-auto flex items-center justify-between text-blue-gray-900">
           <Typography
             variant="small"
@@ -116,7 +112,7 @@ const GlobalNav = () => {
         </div>
         <MobileNav open={openNav}>
           {navList}
-          <UserIcon placement="top-start" variant="mobile" />
+          <UserIcon placement="right-end" variant="mobile" />
         </MobileNav>
       </Navbar>
     );

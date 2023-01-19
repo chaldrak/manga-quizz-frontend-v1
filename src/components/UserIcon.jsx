@@ -9,7 +9,7 @@ import {
   Button,
 } from "@material-tailwind/react";
 import useAuth from "../hooks/useAuth";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { removeItem } from "../services/localStorage";
 const UserLogoDefault =
   "https://res.cloudinary.com/dumxkdcvd/image/upload/v1673972861/uwp2202806_mu3vgh.jpg";
@@ -39,8 +39,12 @@ const UserIcon = ({ placement, variant }) => {
           />
         </MenuHandler>
         <MenuList>
-          <MenuItem>Dashboard</MenuItem>
-          <MenuItem>Account</MenuItem>
+          <MenuItem>
+            <NavLink to="/dashboard">Dashboard</NavLink>
+          </MenuItem>
+          <MenuItem>
+            <NavLink to="/account">Account</NavLink>
+          </MenuItem>
           <Button
             color="red"
             variant="gradient"

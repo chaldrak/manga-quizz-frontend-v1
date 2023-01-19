@@ -8,6 +8,9 @@ import { DataProvider } from "../context/DataProvider";
 import RequiredAuth from "../components/RequiredAuth";
 import HomePage from "../pages/HomePage";
 import GlobalNav from "../components/GlobalNav";
+import DashboardMenu from "../components/DashboardMenu";
+import Leaderboard from "../pages/Leaderboard";
+import Account from "../pages/Account";
 
 function App() {
   return (
@@ -22,7 +25,12 @@ function App() {
           {/* Protected Routes */}
           <Route element={<RequiredAuth />}>
             <Route path="/" element={<HomePage />} />
-            <Route path="/dashboard" element={<Dashboard />} />
+            <Route element={<DashboardMenu />}>
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/leaders" element={<Leaderboard />} />
+              <Route path="/account" element={<Account />} />
+            </Route>
+            <Route path="/:id/game" element={<h1>Game</h1>} />
           </Route>
 
           {/* Catch all routes */}

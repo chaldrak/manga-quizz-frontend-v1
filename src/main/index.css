@@ -5,7 +5,7 @@
 :root {
   font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
 
-  @apply bg-[#101529] text-white;
+  @apply bg-gray-50 text-white;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -17,4 +17,12 @@
 * {
   margin: 0;
   padding: 0;
+}
+
+.active {
+  @apply text-yellow-900;
+}
+
+.dashboard nav .active {
+  @apply bg-yellow-900 text-white;
 }
