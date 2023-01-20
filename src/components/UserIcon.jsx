@@ -11,11 +11,11 @@ import {
 import useAuth from "../hooks/useAuth";
 import { NavLink, useNavigate } from "react-router-dom";
 import { removeItem } from "../services/localStorage";
-const UserLogoDefault =
-  "https://res.cloudinary.com/dumxkdcvd/image/upload/v1673972861/uwp2202806_mu3vgh.jpg";
+import getUserInfo from "../services/getUserInfo";
 
 const UserIcon = ({ placement, variant }) => {
   const { setAuth } = useAuth();
+  const user = getUserInfo();
   const navigate = useNavigate();
   const logout = () => {
     removeItem();
@@ -31,7 +31,7 @@ const UserIcon = ({ placement, variant }) => {
       <Menu placement={placement}>
         <MenuHandler>
           <Avatar
-            src={UserLogoDefault}
+            src={user?.avatar}
             alt="avatar"
             variant="circular"
             size="sm"

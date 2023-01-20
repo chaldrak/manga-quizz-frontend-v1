@@ -4,7 +4,6 @@ import {
   Bars3Icon,
   TrophyIcon,
   HomeIcon,
-  UsersIcon,
   XMarkIcon,
   UserIcon,
 } from "@heroicons/react/24/outline";
@@ -21,9 +20,6 @@ const navigation = [
   },
   { name: "Account", path: "/account", icon: UserIcon, current: false },
 ];
-
-const UserLogoDefault =
-  "https://res.cloudinary.com/dumxkdcvd/image/upload/v1673972861/uwp2202806_mu3vgh.jpg";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -193,13 +189,13 @@ export default function DashboardMenu() {
                   <div>
                     <img
                       className="inline-block h-9 w-9 rounded-full"
-                      src={UserLogoDefault}
+                      src={user?.avatar}
                       alt=""
                     />
                   </div>
                   <div className="ml-3">
                     <p className="text-sm font-medium text-white">
-                      {user.username}
+                      {user?.username}
                     </p>
                     <p className="text-xs font-medium text-gray-300 group-hover:text-gray-200">
                       View profile

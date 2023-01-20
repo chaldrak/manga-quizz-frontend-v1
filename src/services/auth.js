@@ -22,4 +22,15 @@ const register = async (credentials) => {
     return await response.json();
 };
 
-export {login, register};
+const getUser = async (id, token) => {
+  const response = await fetch(`${api_url}/users/${id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
+      }
+  });
+  return await response.json();
+};
+
+export {login, register, getUser};
