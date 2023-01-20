@@ -56,7 +56,7 @@ const GlobalNav = () => {
   );
   if (auth?.token)
     return (
-      <Navbar className="max-w-screen-7xl relative z-40 mx-auto w-full rounded-none py-2 px-4 lg:px-8">
+      <Navbar className="max-w-screen-7xl sticky top-0 z-40 mx-auto w-full rounded-none py-2 px-4 lg:px-8">
         <div className="container mx-auto flex items-center justify-between text-blue-gray-900">
           <Typography
             variant="small"

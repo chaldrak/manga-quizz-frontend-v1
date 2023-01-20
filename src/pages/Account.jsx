@@ -3,6 +3,7 @@ import getUserInfo from "../services/getUserInfo";
 import CardPersoInfo from "../components/account/personal/CardPersoInfo";
 import UserAvatar from "../components/account/avatar/UserAvatar";
 import CardPassword from "../components/account/password/CardPassword";
+import CardDeleteZone from "../components/account/danger-zone/CardDeleteZone";
 
 const Account = () => {
   const user = getUserInfo();
@@ -20,6 +21,7 @@ const Account = () => {
             <div className="col-span-2 space-y-10">
               <CardPersoInfo />
               <CardPassword />
+              <CardDeleteZone />
             </div>
           </div>
         </div>
