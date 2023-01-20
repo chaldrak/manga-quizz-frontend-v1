@@ -2,6 +2,7 @@ import { Button } from "@material-tailwind/react";
 import getUserInfo from "../services/getUserInfo";
 import CardPersoInfo from "../components/account/personal/CardPersoInfo";
 import UserAvatar from "../components/account/avatar/UserAvatar";
+import CardPassword from "../components/account/password/CardPassword";
 
 const Account = () => {
   const user = getUserInfo();
@@ -16,8 +17,9 @@ const Account = () => {
           <div className="grid h-96 grid-cols-3 gap-10">
             {/* Profile picture */}
             <UserAvatar avatar={user?.avatar} />
-            <div className="col-span-2">
+            <div className="col-span-2 space-y-10">
               <CardPersoInfo />
+              <CardPassword />
             </div>
           </div>
         </div>

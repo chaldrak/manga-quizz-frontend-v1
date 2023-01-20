@@ -26,3 +26,11 @@
 .dashboard nav .active {
   @apply bg-yellow-900 text-white;
 }
+
+table th, td {
+  @apply pb-3;
+}
+
+table th {
+  @apply pr-3;
+}
