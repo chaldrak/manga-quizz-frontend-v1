@@ -1,6 +1,7 @@
 import getUserInfo from "../../../services/getUserInfo";
 import { useState } from "react";
 import ButtonRefreshData from "./ButtonRefreshData";
+import ButtonDeleteAccount from "./ButtonDeleteAccount";
 
 const CardDeleteZone = () => {
   const user = getUserInfo();
@@ -12,7 +13,7 @@ const CardDeleteZone = () => {
       </div>
       <div className="w-full p-5 text-black">
         <ButtonRefreshData />
-        <ButtonRefreshData />
+        <ButtonDeleteAccount />
       </div>
     </div>
   );

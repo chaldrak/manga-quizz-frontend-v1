@@ -18,7 +18,7 @@ const Account = () => {
           <div className="grid h-96 grid-cols-3 gap-10">
             {/* Profile picture */}
             <UserAvatar avatar={user?.avatar} />
-            <div className="col-span-2 space-y-10">
+            <div className="col-span-2 space-y-10 pb-10">
               <CardPersoInfo />
               <CardPassword />
               <CardDeleteZone />
