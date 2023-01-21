@@ -1,8 +1,11 @@
 import { StopCircleIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
 import { BiLoaderAlt } from "react-icons/bi";
+import { updatePassword } from "../../../services/userServices";
+import useAuth from "../../../hooks/useAuth";
 
 const InputPassword = () => {
+  const { auth } = useAuth();
   const [form, setForm] = useState({
     password: "",
     password1: "",
@@ -17,9 +20,26 @@ const InputPassword = () => {
     };
     setForm(formData);
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    alert();
+    setIsLoading(true);
+    const response = await updatePassword(
+      {
+        password: form.password,
+        confirmPass: form.password1,
+      },
+      auth?.token
+    );
+    if (response?.error) {
+      setError(response?.error);
+      return setIsLoading(false);
+    }
+    setError("");
+    setForm({
+      password: "",
+      password1: "",
+    });
+    setIsLoading(false);
   };
   return (
     <form onSubmit={handleSubmit}>
@@ -53,19 +73,23 @@ const InputPassword = () => {
         <tr>
           <th></th>
           <td className="h-11">
-            <button
-              disabled={isLoading}
-              className="flex h-full items-center bg-[#101529] px-3 text-white"
-            >
-              <BiLoaderAlt
-                size={20}
-                className={`mr-2 animate-spin ${!isLoading && "hidden"}`}
-              />
-              <p>{isLoading ? "Loading..." : "SAVE"}</p>
-            </button>
-            <small className={`ml-2 italic text-red-600 ${!error && "hidden"}`}>
-              ⚠ wrong password
-            </small>
+            <div className="flex h-full items-center">
+              <button
+                disabled={isLoading}
+                className="flex h-full items-center bg-[#101529] px-3 text-white"
+              >
+                <BiLoaderAlt
+                  size={20}
+                  className={`mr-2 animate-spin ${!isLoading && "hidden"}`}
+                />
+                <p>{isLoading ? "Loading..." : "SAVE"}</p>
+              </button>
+              <small
+                className={`ml-2 italic text-red-600 ${!error && "hidden"}`}
+              >
+                ⚠ {error}
+              </small>
+            </div>
           </td>
         </tr>
       </table>
