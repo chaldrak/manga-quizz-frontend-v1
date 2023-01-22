@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import {
   Bars3Icon,
@@ -9,6 +9,7 @@ import {
 } from "@heroicons/react/24/outline";
 import getUserInfo from "../services/getUserInfo";
 import { NavLink, Outlet } from "react-router-dom";
+import useUser from "../hooks/useUser";
 
 const navigation = [
   { name: "Dashboard", path: "/dashboard", icon: HomeIcon, current: false },
@@ -27,7 +28,7 @@ function classNames(...classes) {
 
 export default function DashboardMenu() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const user = getUserInfo();
+  const { user } = useUser();
 
   return (
     <>

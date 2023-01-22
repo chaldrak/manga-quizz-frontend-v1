@@ -1,8 +1,8 @@
 import { useContext } from "react";
 import { DataContext } from "../context/DataProvider";
 
-const useAuth = () => {
+const useUser = () => {
   return useContext(DataContext);
 };
 
-export default useAuth;
+export default useUser;

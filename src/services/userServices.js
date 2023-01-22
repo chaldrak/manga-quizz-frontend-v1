@@ -15,4 +15,27 @@ const updatePassword = async (credentials, token) => {
     return await response.json();
 };
 
-export {updatePassword};
+const updateInfo = async (credentials, token) => {
+  const id = getUserInfo()?.id;
+  const response = await fetch(`${api_url}/${id}/info`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
+      },
+      body: JSON.stringify(credentials),
+  });
+  return await response.json();
+};
+
+const getUser = async (token) => {
+    const id = getUserInfo()?.id;
+    const response = await fetch(`${api_url}/${id}`, {
+        headers: {
+          "Authorization": `Bearer ${token}`
+        }
+    });
+    return await response.json();
+};
+
+export {updatePassword, getUser, updateInfo};
