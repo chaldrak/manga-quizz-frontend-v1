@@ -7,8 +7,16 @@ import { updateProfilePic } from "../../../services/userServices";
 import useAuth from "../../../hooks/useAuth";
 import { useState } from "react";
 import { BiLoaderAlt } from "react-icons/bi";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer, toast } from "react-toastify";
 
 const UserAvatar = () => {
+  const notify = () => {
+    toast.error("Operation Failed !", {
+      position: toast.POSITION.TOP_RIGHT,
+      theme: "colored",
+    });
+  };
   const [isLoading, setIsLoading] = useState(false);
   const { user, setUser } = useUser();
   const { auth } = useAuth();
@@ -18,14 +26,18 @@ const UserAvatar = () => {
   };
   const onInputChange = (e) => {
     if (e.target.files.length > 0) {
-      changeProfile(e.target.files[0]);
+      console.log(e.target.files[0]);
+      const file = e.target.files[0];
+      const newFile = new File([file], user?.username, { type: file.type });
+      console.log(newFile);
+      changeProfile(newFile);
     }
   };
   const changeProfile = (image) => {
     if (imageIsValid(image)) {
       uploadPic(image);
     } else {
-      alert("File is not an image !!!");
+      notify();
     }
   };
   const imageIsValid = (image) => {
@@ -51,6 +63,7 @@ const UserAvatar = () => {
       const res = await updateProfilePic({ avatar: url }, auth?.token);
       if (res?.error) {
         console.log(error);
+        notify();
         return setIsLoading(true);
       }
     }
@@ -59,6 +72,7 @@ const UserAvatar = () => {
   return (
     <div className="h-80 text-center">
       <div className="relative">
+        <ToastContainer />
         <img
           src={user?.avatar}
           alt="profile-picture"

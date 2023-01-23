@@ -14,9 +14,11 @@ import { login } from "../services/auth";
 import { BiLoaderAlt } from "react-icons/bi";
 import { setItem } from "../services/localStorage";
 import useAuth from "../hooks/useAuth";
+import useUser from "../hooks/useUser";
 
 const Signin = () => {
   const { auth, setAuth } = useAuth();
+  const { user, setUser } = useUser();
   const navigate = useNavigate();
   // Get user signed up data
   const location = useLocation();
@@ -57,6 +59,7 @@ const Signin = () => {
       token: token,
     });
     setAuth({ token });
+    setUser({});
     setError("");
     setForm({
       fullname: "",
