@@ -4,7 +4,7 @@ import useUser from "../../../hooks/useUser";
 const PersoInfo = ({ setEdit, edit }) => {
   const { user } = useUser();
   return (
-    <div className={`flex items-center space-x-2 ${edit && "hidden"}`}>
+    <div className={`flex h-8 items-center space-x-2 ${edit && "hidden"}`}>
       <p className="text-lg font-bold">Username : </p>
       <p>{user?.username}</p>
       <button onClick={() => setEdit((c) => !c)}>
