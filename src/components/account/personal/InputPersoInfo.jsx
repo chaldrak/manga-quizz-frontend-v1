@@ -3,6 +3,7 @@ import useUser from "../../../hooks/useUser";
 import { updateInfo } from "../../../services/userServices";
 import useAuth from "../../../hooks/useAuth";
 import { useEffect } from "react";
+import { BiLoaderAlt } from "react-icons/bi";
 
 const InputPersoInfo = ({ edit, setEdit }) => {
   const { user, setUser } = useUser();
@@ -39,12 +40,17 @@ const InputPersoInfo = ({ edit, setEdit }) => {
     setEdit(false);
   };
   const onCancel = (e) => {
-    alert("Cnacel");
+    setError("");
+    setName(user?.username);
+    setEdit(false);
   };
   return (
     <div className={`flex items-center space-x-2 ${!edit && "hidden"}`}>
       <p className="text-lg font-bold">Username : </p>
-      <form className="h-8 space-x-3" onSubmit={handleSubmit}>
+      <form
+        className="relative flex h-8 items-center space-x-3"
+        onSubmit={handleSubmit}
+      >
         <input
           type="text"
           name="username"
@@ -52,13 +58,33 @@ const InputPersoInfo = ({ edit, setEdit }) => {
           className="h-full border border-[#101529] px-3 focus:ring-0"
           onChange={handleInput}
         />
-        <button className="h-full bg-[#101529] px-2 text-white">SAVE</button>
         <button
+          disabled={isLoading}
+          type="submit"
+          className={`flex h-full items-center px-2 text-white ${
+            isLoading ? "bg-gray-800" : "bg-[#101529]"
+          }`}
+        >
+          <BiLoaderAlt
+            size={20}
+            className={`mr-2 animate-spin ${!isLoading && "hidden"}`}
+          />
+          <p>{isLoading ? "Loading..." : "SAVE"}</p>
+        </button>
+        <button
+          type="reset"
           className="h-full border border-[#101529] px-2 text-[#101529]"
           onClick={onCancel}
         >
           CANCEL
         </button>
+        <small
+          className={`absolute -bottom-5 italic text-red-600 ${
+            !error && "hidden"
+          }`}
+        >
+          ⚠ {error}
+        </small>
       </form>
     </div>
   );

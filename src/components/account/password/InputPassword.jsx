@@ -86,7 +86,9 @@ const InputPassword = () => {
               <div className="flex h-full items-center">
                 <button
                   disabled={isLoading}
-                  className="flex h-full items-center bg-[#101529] px-3 text-white"
+                  className={`flex h-full items-center px-2 text-white ${
+                    isLoading ? "bg-gray-800" : "bg-[#101529]"
+                  }`}
                 >
                   <BiLoaderAlt
                     size={20}
