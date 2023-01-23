@@ -2,7 +2,8 @@ import { useContext } from "react";
 import { DataContext } from "../context/DataProvider";
 
 const useUser = () => {
-  return useContext(DataContext);
+  const { user, setUser } = useContext(DataContext);
+  return { user, setUser };
 };
 
 export default useUser;

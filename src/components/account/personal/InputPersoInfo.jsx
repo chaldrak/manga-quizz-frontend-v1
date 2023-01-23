@@ -31,7 +31,9 @@ const InputPersoInfo = ({ edit, setEdit }) => {
       avatar: user?.avatar,
     });
     if (response?.error) {
-      setError(response?.error);
+      response?.error.includes("contrainte unique")
+        ? setError("Username already taken")
+        : setError(response?.error);
       return setIsLoading(false);
     }
     setError("");

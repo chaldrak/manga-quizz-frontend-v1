@@ -12,10 +12,11 @@ import useAuth from "../hooks/useAuth";
 import { NavLink, useNavigate } from "react-router-dom";
 import { removeItem } from "../services/localStorage";
 import getUserInfo from "../services/getUserInfo";
+import useUser from "../hooks/useUser";
 
 const UserIcon = ({ placement, variant }) => {
   const { setAuth } = useAuth();
-  const user = getUserInfo();
+  const { user } = useUser();
   const navigate = useNavigate();
   const logout = () => {
     removeItem();
