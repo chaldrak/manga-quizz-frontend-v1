@@ -3,7 +3,6 @@ import { getItem } from "../services/localStorage";
 import { getUser } from "../services/userServices";
 
 const DataContext = createContext();
-const UserContext = createContext();
 
 export const DataProvider = ({ children }) => {
   const userToken = getItem() || {};
@@ -25,11 +24,9 @@ export const DataProvider = ({ children }) => {
 
   return (
     <DataContext.Provider value={{ auth, setAuth, user, setUser }}>
-      {/* <UserContext.Provider value={{ user, setUser }}> */}
       {children}
-      {/* </UserContext.Provider> */}
     </DataContext.Provider>
   );
 };
 
-export { DataContext, UserContext };
+export { DataContext };
