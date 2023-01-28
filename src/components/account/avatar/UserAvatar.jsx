@@ -16,6 +16,7 @@ const UserAvatar = () => {
       position: toast.POSITION.TOP_RIGHT,
       theme: "colored",
     });
+    border;
   };
   const [isLoading, setIsLoading] = useState(false);
   const { user, setUser } = useUser();
