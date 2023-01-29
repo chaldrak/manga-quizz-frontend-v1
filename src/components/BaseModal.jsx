@@ -5,6 +5,7 @@ import {
   DialogHeader,
   DialogBody,
   DialogFooter,
+  Input,
 } from "@material-tailwind/react";
 
 export default function BaseModal({
@@ -14,8 +15,14 @@ export default function BaseModal({
   title,
   open,
   setOpen,
+  username,
+  setUsername,
+  onChange,
 }) {
-  const handleOpen = () => setOpen(!open);
+  const handleOpen = () => {
+    setOpen(!open);
+    setUsername("");
+  };
   return (
     <Fragment>
       <button
@@ -33,7 +40,27 @@ export default function BaseModal({
         }}
       >
         <DialogHeader>{title}</DialogHeader>
-        <DialogBody divider>{description}</DialogBody>
+        <DialogBody
+          divider={title.includes("Reset")}
+          className="border-t border-gray-300"
+        >
+          {description}
+        </DialogBody>
+        <DialogBody
+          className={`items-center space-x-2 border-b border-gray-300 ${
+            title.includes("Reset") ? "hidden" : "flex"
+          }`}
+        >
+          <label className="whitespace-nowrap">Confirm your username :</label>
+          <Input
+            color="indigo"
+            label="Username"
+            value={username}
+            onChange={onChange}
+            onPaste={(e) => e.preventDefault()}
+            className="font-black"
+          />
+        </DialogBody>
         <DialogFooter>
           <Button
             variant="text"

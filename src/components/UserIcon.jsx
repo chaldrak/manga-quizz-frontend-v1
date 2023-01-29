@@ -41,7 +41,9 @@ const UserIcon = ({ placement, variant }) => {
         </MenuHandler>
         <MenuList>
           <MenuItem>
-            <NavLink to="/dashboard">Dashboard</NavLink>
+            <NavLink to="/dashboard" className="hover:border-0">
+              Dashboard
+            </NavLink>
           </MenuItem>
           <MenuItem>
             <NavLink to="/account">Account</NavLink>

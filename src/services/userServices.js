@@ -51,4 +51,15 @@ const getUser = async (token) => {
     return await response.json();
 };
 
-export {updatePassword, getUser, updateInfo, updateProfilePic};
+const deleteAccount = async (token) => {
+  const id = getUserInfo()?.id;
+  const response = await fetch(`${api_url}/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Authorization": `Bearer ${token}`
+      }
+  });
+  return await response.json();
+};
+
+export {updatePassword, getUser, updateInfo, updateProfilePic, deleteAccount};

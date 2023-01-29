@@ -24,7 +24,7 @@ const menu = [
 
 const HomePage = () => {
   return (
-    <div className="h-[calc(100vh_-_60px)] w-full bg-[#101529]">
+    <div className="h-[calc(100vh_-_58px)] w-full bg-[#101529]">
       <div className="flex h-full w-full items-center justify-evenly">
         {menu.map((item, index) => (
           <BaseCard key={index} {...item} />
