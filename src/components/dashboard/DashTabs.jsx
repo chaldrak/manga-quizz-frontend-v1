@@ -7,10 +7,10 @@ import {
 } from "@material-tailwind/react";
 import BaseTable from "../BaseTable";
 import { useEffect, useState } from "react";
-import { getScores } from "../../services/scoreServices";
+import { getScoresByTotal } from "../../services/scoreServices";
 import useAuth from "../../hooks/useAuth";
 
-export default function DashTabs() {
+export default function DashTabs({ scores }) {
   const data = [
     {
       label: "Naruto",
@@ -29,21 +29,6 @@ export default function DashTabs() {
       value: "3",
     },
   ];
-
-  const [scores, setScores] = useState([]);
-  const { auth, setAuth } = useAuth();
-
-  useEffect(() => {
-    listScores();
-  }, []);
-
-  const listScores = async () => {
-    const response = await getScores(auth?.token);
-    if (response?.error) {
-      console.log(response?.error);
-    }
-    setScores(response?.scores);
-  };
 
   return (
     <Tabs id="custom-animation" value="1" className="h-[calc(100vh_-_200px)]">

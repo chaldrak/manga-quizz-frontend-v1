@@ -77,11 +77,11 @@ const data = [
 ];
 
 export default function RecentActivities({ scores }) {
-  const recents = scores?.filter((s, index) => index < 5);
+  const recents = scores.filter((s, index) => index < 5);
   return (
     <div className="flow-root">
       <ul role="list" className="-mb-8">
-        {recents?.map((event, index) => (
+        {recents.map((event, index) => (
           <li key={index}>
             <div className="relative pb-8">
               {index !== recents?.length - 1 ? (

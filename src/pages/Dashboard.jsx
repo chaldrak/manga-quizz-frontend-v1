@@ -2,22 +2,31 @@ import React, { useEffect } from "react";
 import DashTabs from "../components/dashboard/DashTabs";
 import RecentActivities from "../components/dashboard/RecentActivities";
 import StatsUser from "../components/dashboard/StatsUser";
-import { getUserScores } from "../services/scoreServices";
+import { getUserScores, getUserScoresByTotal } from "../services/scoreServices";
 import useAuth from "../hooks/useAuth";
 import { useState } from "react";
 
 const Dashboard = () => {
   const { auth, setAuth } = useAuth();
   const [scores, setScores] = useState([]);
-  const getTotalPlay = async () => {
+  const [scoresByTotal, setScoresByTotal] = useState([]);
+  const getUserScoresByDate = async () => {
     const response = await getUserScores(auth?.token);
     if (response?.error) {
       console.log(response?.error);
     }
     setScores(response?.scores);
   };
+  const getUserScoresByScore = async () => {
+    const response = await getUserScoresByTotal(auth?.token);
+    if (response?.error) {
+      console.log(response?.error);
+    }
+    setScoresByTotal(response?.scores);
+  };
   useEffect(() => {
-    getTotalPlay();
+    getUserScoresByDate();
+    getUserScoresByScore();
   }, []);
   return (
     <div className="py-6 ">
@@ -29,9 +38,9 @@ const Dashboard = () => {
         {/* Replace with your content */}
         <div className="py-4">
           <h3 className="mb-10 text-xl font-semibold text-gray-900">
-            🌟 Statistiques
+            🌟 Statistics
           </h3>
-          <StatsUser scores={scores} />
+          <StatsUser />
 
           <h3 className="my-10 text-xl font-semibold text-gray-900">
             🌟 Recent activities
@@ -41,7 +50,7 @@ const Dashboard = () => {
           <h3 className="my-10 text-xl font-semibold text-gray-900">
             🌟 My Scores
           </h3>
-          <DashTabs />
+          <DashTabs scores={scoresByTotal} />
         </div>
         {/* /End replace */}
       </div>

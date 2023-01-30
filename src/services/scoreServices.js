@@ -22,9 +22,28 @@ const getScores = async (token) => {
   return await response.json();
 };
 
+const getScoresByTotal = async (token) => {
+  const response = await fetch(`${api_url}/scores/orderbyscore`, {
+      headers: {
+        "Authorization": `Bearer ${token}`
+      }
+  });
+  return await response.json();
+};
+
 const getUserScores = async (token) => {
   const id = getUserInfo()?.id;
   const response = await fetch(`${api_url}/users/${id}/scores`, {
+      headers: {
+        "Authorization": `Bearer ${token}`
+      }
+  });
+  return await response.json();
+};
+
+const getUserScoresByTotal = async (token) => {
+  const id = getUserInfo()?.id;
+  const response = await fetch(`${api_url}/users/${id}/scores/orderbyscore`, {
       headers: {
         "Authorization": `Bearer ${token}`
       }
@@ -41,4 +60,4 @@ const getTotalScores = async (token) => {
   return await response.json();
 };
 
-export {reset, getScores, getUserScores, getTotalScores};
+export {reset, getScores, getUserScores, getUserScoresByTotal, getTotalScores, getScoresByTotal};

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import StatsCard from "../StatsCard";
 import { useEffect } from "react";
-import { getTotalScores } from "../../services/scoreServices";
+import { getTotalScores, getUserScores } from "../../services/scoreServices";
 import useAuth from "../../hooks/useAuth";
 import getUserInfo from "../../services/getUserInfo";
 
@@ -9,7 +9,7 @@ export default function StatsUser({ scores }) {
   const { auth, setAuth } = useAuth();
   const [totalPlay, setTotalPlay] = useState({
     name: "Total Play",
-    stat: scores?.length,
+    stat: 0,
   });
   const [totalScore, setTotalScore] = useState({
     name: "Total Score",
@@ -21,6 +21,7 @@ export default function StatsUser({ scores }) {
   });
   useEffect(() => {
     getTotalScore();
+    getUserScoresByDate();
   }, []);
 
   const getTotalScore = async () => {
@@ -39,6 +40,16 @@ export default function StatsUser({ scores }) {
     setTotalRank({
       name: "Total Rank",
       stat: "#" + totalRank,
+    });
+  };
+  const getUserScoresByDate = async () => {
+    const response = await getUserScores(auth?.token);
+    if (response?.error) {
+      console.log(response?.error);
+    }
+    setTotalPlay({
+      name: "Total Play",
+      stat: response?.scores?.length,
     });
   };
   return (
