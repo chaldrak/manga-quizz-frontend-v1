@@ -5,6 +5,7 @@ import StatsUser from "../components/dashboard/StatsUser";
 import { getUserScores, getUserScoresByTotal } from "../services/scoreServices";
 import useAuth from "../hooks/useAuth";
 import { useState } from "react";
+import Footer from "../components/Footer";
 
 const Dashboard = () => {
   const { auth, setAuth } = useAuth();
@@ -51,6 +52,7 @@ const Dashboard = () => {
             🌟 My Scores
           </h3>
           <DashTabs scores={scoresByTotal} />
+          <Footer />
         </div>
         {/* /End replace */}
       </div>

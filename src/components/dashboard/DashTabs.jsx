@@ -6,9 +6,6 @@ import {
   TabPanel,
 } from "@material-tailwind/react";
 import BaseTable from "../BaseTable";
-import { useEffect, useState } from "react";
-import { getScoresByTotal } from "../../services/scoreServices";
-import useAuth from "../../hooks/useAuth";
 
 export default function DashTabs({ scores }) {
   const data = [
@@ -31,7 +28,7 @@ export default function DashTabs({ scores }) {
   ];
 
   return (
-    <Tabs id="custom-animation" value="1" className="h-[calc(100vh_-_200px)]">
+    <Tabs id="custom-animation" value="1">
       <TabsHeader className="bg-yellow-900">
         {data.map(({ label, value }) => (
           <Tab key={value} value={value}>

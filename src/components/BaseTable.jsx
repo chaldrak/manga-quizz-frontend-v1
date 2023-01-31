@@ -69,7 +69,7 @@ export default function BaseTable({ title, data, path }) {
                   {data.map((person, index) => (
                     <tr key={index}>
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                        {index + 1}
+                        {data.indexOf(person) + 1}
                       </td>
                       <td
                         hidden={location.pathname === "/dashboard"}

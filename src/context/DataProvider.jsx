@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import { getItem } from "../services/localStorage";
+import { getItem, removeItem } from "../services/localStorage";
 import { getUser } from "../services/userServices";
 
 const DataContext = createContext();
@@ -13,6 +13,8 @@ export const DataProvider = ({ children }) => {
     const response = await getUser(auth?.token);
     if (response?.error) {
       console.log(response?.error);
+      setAuth({});
+      removeItem();
       return;
     }
     setUser(response?.user);

@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import DashTabs from "../components/dashboard/DashTabs";
 import useAuth from "../hooks/useAuth";
 import { getScoresByTotal } from "../services/scoreServices";
+import BasePagination from "../components/BasePagination";
+import Footer from "../components/Footer";
 
 const Leaderboard = () => {
   const [scores, setScores] = useState([]);
@@ -19,7 +21,7 @@ const Leaderboard = () => {
     setScores(response?.scores);
   };
   return (
-    <div className="py-6 ">
+    <div className="py-6">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <h1 className="text-3xl font-semibold text-gray-900">Leaderboard</h1>
       </div>
@@ -27,6 +29,7 @@ const Leaderboard = () => {
         {/* Replace with your content */}
         <div className="py-4">
           <DashTabs scores={scores} />
+          <Footer />
         </div>
         {/* /End replace */}
       </div>
