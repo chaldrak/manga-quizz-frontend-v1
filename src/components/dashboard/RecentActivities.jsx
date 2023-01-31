@@ -3,6 +3,8 @@ import {
   HandThumbUpIcon,
   UserIcon,
 } from "@heroicons/react/20/solid";
+import { formatTime } from "../../utils/formatTime";
+import { formatDateText } from "../../utils/formatDate";
 
 const timeline = [
   {
@@ -113,7 +115,11 @@ export default function RecentActivities({ scores }) {
                     </p>
                   </div>
                   <div className="whitespace-nowrap text-right text-sm text-gray-500">
-                    <time dateTime="2020-10-04">{event.created_date}</time>
+                    <time dateTime="2020-10-04">
+                      {formatDateText(event.created_date)}
+                      {", "}
+                      {formatTime(event.created_date)}
+                    </time>
                   </div>
                 </div>
               </div>

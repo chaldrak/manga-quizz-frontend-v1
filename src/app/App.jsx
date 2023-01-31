@@ -11,6 +11,7 @@ import GlobalNav from "../components/GlobalNav";
 import DashboardMenu from "../components/DashboardMenu";
 import Leaderboard from "../pages/Leaderboard";
 import Account from "../pages/Account";
+import Faqs from "../pages/Faqs";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           {/* Public Routes */}
           <Route path="/signup" element={<Signup />} />
           <Route path="/signin" element={<Signin />} />
+          <Route path="/faq" element={<Faqs />} />
 
           {/* Protected Routes */}
           <Route element={<RequiredAuth />}>
