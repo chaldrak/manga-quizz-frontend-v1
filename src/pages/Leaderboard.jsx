@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import DashTabs from "../components/dashboard/DashTabs";
 import useAuth from "../hooks/useAuth";
 import { getScoresByTotal } from "../services/scoreServices";
-import BasePagination from "../components/BasePagination";
 import Footer from "../components/Footer";
 
 const Leaderboard = () => {

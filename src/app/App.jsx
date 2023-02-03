@@ -12,6 +12,7 @@ import DashboardMenu from "../components/DashboardMenu";
 import Leaderboard from "../pages/Leaderboard";
 import Account from "../pages/Account";
 import Faqs from "../pages/Faqs";
+import GamePage from "../pages/GamePage";
 
 function App() {
   return (
@@ -32,7 +33,7 @@ function App() {
               <Route path="/leaders" element={<Leaderboard />} />
               <Route path="/account" element={<Account />} />
             </Route>
-            <Route path="/:id/game" element={<h1>Game</h1>} />
+            <Route path="/:id/game" element={<GamePage />} />
           </Route>
 
           {/* Catch all routes */}
