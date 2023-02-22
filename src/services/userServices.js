@@ -1,6 +1,6 @@
 import getUserInfo from "./getUserInfo";
 
-const api_url = "http://localhost:8080/api/users";
+const api_url = "https://manga-quizz-api-v1.onrender.com/api/users";
 
 const updatePassword = async (credentials, token) => {
     const id = getUserInfo()?.id;

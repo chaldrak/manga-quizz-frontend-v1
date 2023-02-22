@@ -1,6 +1,6 @@
 import getUserInfo from "./getUserInfo";
 
-const api_url = "http://localhost:8080/api";
+const api_url = "https://manga-quizz-api-v1.onrender.com/api";
 
 const reset = async (token) => {
     const id = getUserInfo()?.id;
